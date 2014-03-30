@@ -80,7 +80,7 @@ int main()
 	//texture.create(1280, 800);
 	if (rift->isConnected())
 	{
-		texture.create(6720, 1088);
+		texture.create(2048, 1080);
 	}
 	else
 	{
@@ -143,7 +143,7 @@ int main()
 			perspTranslation = pv_glGetUniformLocation(program, "perspTranslation");
 			pv_glUniformMatrix4fv(perspTranslation, 1, false, perspectiveMatrixLeft);
 			viewTranslation = pv_glGetUniformLocation(program, "viewTranslation");
-			pv_glUniformMatrix4fv(viewTranslation, 1, false, viewMatrixLeft);
+			glUniform4f(viewTranslation, viewMatrixLeft[12], 0, 0, 1);
 			rotX = pv_glGetUniformLocation(program, "rotMatrixX");
 			pv_glUniformMatrix4fv(rotX, 1, false, rotMatrixX);
 			rotY = pv_glGetUniformLocation(program, "rotMatrixY");
@@ -162,7 +162,7 @@ int main()
 			perspTranslation = pv_glGetUniformLocation(program, "perspTranslation");
 			pv_glUniformMatrix4fv(perspTranslation, 1, false, perspectiveMatrixRight);
 			viewTranslation = pv_glGetUniformLocation(program, "viewTranslation");
-			pv_glUniformMatrix4fv(viewTranslation, 1, false, viewMatrixRight);
+			glUniform4f(viewTranslation, viewMatrixLeft[12], 0, 0, 0);
 			rotX = pv_glGetUniformLocation(program, "rotMatrixX");
 			pv_glUniformMatrix4fv(rotX, 1, false, rotMatrixX);
 			rotY = pv_glGetUniformLocation(program, "rotMatrixY");

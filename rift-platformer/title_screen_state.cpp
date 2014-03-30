@@ -2,22 +2,32 @@
 
 title_screen::title_screen(sf::RenderTexture* renderWindow) : game_state(renderWindow)
 {
+	this->setup();
+	song.openFromFile("music/song_main.wav");
+	song.setLoop(true);
+	song.play();
+	//buffer.loadFromFile("death.wav");
+}
+
+void title_screen::setup()
+{
 	spriteManager.add("logo", "graphics/title_screen/MainSprite.png", "graphics/title_screen/bounds.png", 128, 134);
 	//spriteManager.add("logo2", "graphics/title_screen/testBg.png", 1600, 800);
-	spriteManager.add("logo2", "graphics/title_screen/testBg2.png", 6720, 1088);
+	spriteManager.add("logo2", "graphics/title_screen/detailedbg.png", "graphics/title_screen/collisionmap.png", 6720, 1088);
 
 	frame = 0;
 	gravity = 0.0f;
 	scrollX = 0.0f;
-	scrollY = 0.0f;
+	posX = 0;
+	scrollY = -50.0f;
 	this->touchingGround = false;
 	this->jumpCount = 0;
 }
-#define FPS 30
+#define FPS 15
 void title_screen::update()
 {
 	spriteManager.setFrame("logo", 8);
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left) && spriteManager.getSprite("logo")->getPosition().x > 0)
 	{
 		spriteManager.getSprite("logo")->move(-1, 0);
 		spriteManager.flip("logo", true, false);
@@ -38,7 +48,7 @@ void title_screen::update()
 		{
 			fps += 1;
 		}
-		scrollX -= 1.0f;
+		posX -= 1;
 	}
 	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
 	{
@@ -61,7 +71,7 @@ void title_screen::update()
 		{
 			fps += 1;
 		}
-		scrollX += 1.0f;
+		posX += 1;
 	}
 	if (!this->touchingGround)
 	{
@@ -85,10 +95,12 @@ void title_screen::update()
 		if (spriteManager.isFlippedH("logo"))
 		{
 			spriteManager.getSprite("logo")->move(1, 0);
+			posX += 1;
 		}
 		else
 		{
 			spriteManager.getSprite("logo")->move(-1, 0);
+			posX -= 1;
 		}
 		hasCollision = spriteManager.hasCollision("logo", "logo2", c, sf::Color());
 	}
@@ -97,10 +109,12 @@ void title_screen::update()
 		if (spriteManager.isFlippedH("logo"))
 		{
 			spriteManager.getSprite("logo")->move(-1, 0);
+			posX -= 1;
 		}
 		else
 		{
 			spriteManager.getSprite("logo")->move(1, 0);
+			posX += 1;
 		}
 		hasCollision = spriteManager.hasCollision("logo", "logo2", c, sf::Color());
 	}
@@ -133,11 +147,13 @@ void title_screen::update()
 	spriteManager.getSprite("logo")->move(0, gravity);
 	if (!this->touchingGround && gravity < 7.0f)
 	{
-		gravity += 0.025f;
+		gravity += 0.040f;
 	}
 
 	sf::Vector2f pos1 = spriteManager.getSprite("logo")->getPosition();
 	sf::Vector2f pos2 = spriteManager.getSprite("logo2")->getPosition();
+	scrollX = (posX / renderWindow->getSize().x) 
+		* spriteManager.getSprite("logo2")->getTexture()->getSize().x;
 
 	if (pos1.y > this->renderWindow->getSize().y - (this->renderWindow->getSize().y * 0.25) &&
 		-pos2.y < spriteManager.getSprite("logo2")->getTextureRect().height
@@ -159,12 +175,21 @@ void title_screen::update()
 	{
 		spriteManager.getSprite("logo")->move(-1, 0);
 		spriteManager.getSprite("logo2")->move(-1, 0);
+		posX -= 1;
 	}
 	if (pos1.x < (this->renderWindow->getSize().x * 0.25) &&
 		pos2.x < 0)
 	{
 		spriteManager.getSprite("logo")->move(1, 0);
 		spriteManager.getSprite("logo2")->move(1, 0);
+		posX += 1;
+	}
+
+	if (pos1.y > spriteManager.getSprite("logo2")->getTexture()->getSize().y)
+	{
+		spriteManager.remove("logo");
+		spriteManager.remove("logo2");
+		this->setup();
 	}
 }
 void title_screen::draw()
