@@ -8,6 +8,9 @@ class title_screen : game_state
 public:
 	title_screen(sf::RenderWindow* renderWindow);
 private:
+	int fps = 0;
+	int frame;
+	int jumpCount;
 	bool touchingGround;
 	float gravity;
 	void update();

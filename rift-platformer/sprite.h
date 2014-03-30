@@ -10,11 +10,15 @@ public:
 	bool flippedH, flippedV;
 
 	Sprite();
-	Sprite(const char* imageName);
-	void load(const char* imageName);
+	Sprite(const char* imageName, int width, int height);
+	void load(const char* imageName, int width, int height);
 	void Draw(sf::RenderWindow* window);
+
+	void Flip(bool flipH, bool flipV);
+	void setFrame(int frame);
 private:
 	sf::Texture texture;
+	int width, height;
 };
 
 #endif

@@ -4,14 +4,14 @@ sprite_manager::sprite_manager()
 {
 }
 
-void sprite_manager::add(const char* id, const char* fileName)
+void sprite_manager::add(const char* id, const char* fileName, int width, int height)
 {
-	sprites.insert(std::pair<std::string, Sprite*>(id, new Sprite(fileName)));
+	sprites.insert(std::pair<std::string, Sprite*>(id, new Sprite(fileName, width, height)));
 	images.insert(std::pair<std::string, sf::Image>(id, this->getSprite(id)->getTexture()->copyToImage()));
 }
-void sprite_manager::add(const char* id, const char* fileName, const char* collisionFile)
+void sprite_manager::add(const char* id, const char* fileName, const char* collisionFile, int width, int height)
 {
-	sprites.insert(std::pair<std::string, Sprite*>(id, new Sprite(fileName)));
+	sprites.insert(std::pair<std::string, Sprite*>(id, new Sprite(fileName, width, height)));
 
 	images.insert(std::pair<std::string, sf::Image>(id, sf::Image()));
 	this->getImage(id)->loadFromFile(collisionFile);
@@ -33,25 +33,18 @@ void sprite_manager::flip(const char* id, bool flipH, bool flipV)
 	if (flipH != sprite->flippedH)
 	{
 		images.find(id)->second.flipHorizontally();
-		sprite->flippedH = flipH;
-
 	}
 	if (flipV != sprite->flippedV)
 	{
 		images.find(id)->second.flipVertically();
-		sprite->flippedV = flipV;
 	}
 
-	if (flipH)
-	{
-		sprite->sprite.setTextureRect(sf::IntRect(sprite->sprite.getTexture()->getSize().x, 0,
-			-sprite->sprite.getTexture()->getSize().x, sprite->sprite.getTexture()->getSize().y));
-	}
-	else
-	{
-		sprite->sprite.setTextureRect(sf::IntRect(0, 0,
-			sprite->sprite.getTexture()->getSize().x, sprite->sprite.getTexture()->getSize().y));
-	}
+	sprite->Flip(flipH, flipV);
+}
+
+void sprite_manager::setFrame(const char* id, int frame)
+{
+	this->sprites.find(id)->second->setFrame(frame);
 }
 
 sf::Sprite* sprite_manager::getSprite(const char* id)
@@ -73,6 +66,12 @@ bool sprite_manager::hasCollision(const char* id1, const char* id2, sf::Color &c
 	sf::Sprite* sprite1 = this->getSprite(id1);
 	sf::Sprite* sprite2 = this->getSprite(id2);
 
+	sf::Vector2f original1 = sprite1->getScale();
+	sf::Vector2f original2 = sprite2->getScale();
+
+	sprite1->setScale(abs(sprite1->getScale().x), abs(sprite1->getScale().y));
+	sprite2->setScale(abs(sprite2->getScale().x), abs(sprite2->getScale().y));
+
 	sf::Transform t1 = sprite1->getTransform();
 	sf::Transform t2 = sprite2->getTransform();
 
@@ -81,17 +80,17 @@ bool sprite_manager::hasCollision(const char* id1, const char* id2, sf::Color &c
 
 	sf::Transform transformed = t1 * t2.getInverse();
 
-	for (int yA = 0; yA < sprite1->getTexture()->getSize().y; yA += 1)
+	for (int yA = 0; yA < sprite1->getTextureRect().height; yA += 1)
 	{
-		for (int xA = 0; xA < sprite1->getTexture()->getSize().x; xA += 1)
+		for (int xA = 0; xA < sprite1->getTextureRect().width; xA += 1)
 		{
 			sf::Vector2f positionIn2 = transformed.transformPoint(xA, yA);
 
 			int x = positionIn2.x;
 			int y = positionIn2.y;
 
-			if (0 <= x && x < sprite2->getTexture()->getSize().x && 
-				0 <= y && y < sprite2->getTexture()->getSize().y)
+			if (0 <= x && x < sprite2->getTextureRect().width &&
+				0 <= y && y < sprite2->getTextureRect().height)
 			{
 				sf::Color c1 = i1->getPixel(xA, yA);
 				sf::Color c2 = i2->getPixel(x, y);
@@ -100,11 +99,15 @@ bool sprite_manager::hasCollision(const char* id1, const char* id2, sf::Color &c
 				{
 					color1 = c1;
 					color2 = c2;
+					sprite1->setScale(original1);
+					sprite2->setScale(original2);
 					return true;
 				}
 			}
 		}
 	}
+	sprite1->setScale(original1);
+	sprite2->setScale(original2);
 	return false;
 }
 
