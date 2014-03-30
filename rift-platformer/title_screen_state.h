@@ -8,6 +8,7 @@ class title_screen : game_state
 public:
 	title_screen(sf::RenderWindow* renderWindow);
 private:
+	void update();
 	void draw();
 };
 
