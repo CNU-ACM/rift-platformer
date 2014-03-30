@@ -117,7 +117,7 @@ void sprite_manager::remove(const char* id)
 	images.erase(id);
 }
 
-void sprite_manager::Update(sf::RenderWindow* window)
+void sprite_manager::Update(sf::RenderTexture* window)
 {
 	for (std::map<std::string, Sprite*>::iterator it = this->sprites.begin();
 		it != this->sprites.end(); ++it)

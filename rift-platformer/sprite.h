@@ -12,7 +12,7 @@ public:
 	Sprite();
 	Sprite(const char* imageName, int width, int height);
 	void load(const char* imageName, int width, int height);
-	void Draw(sf::RenderWindow* window);
+	void Draw(sf::RenderTexture* window);
 
 	void Flip(bool flipH, bool flipV);
 	void setFrame(int frame);

@@ -1,15 +1,19 @@
 #include "title_screen_state.h"
 
-title_screen::title_screen(sf::RenderWindow* renderWindow) : game_state(renderWindow)
+title_screen::title_screen(sf::RenderTexture* renderWindow) : game_state(renderWindow)
 {
 	spriteManager.add("logo", "graphics/title_screen/MainSprite.png", "graphics/title_screen/bounds.png", 128, 134);
-	spriteManager.add("logo2", "graphics/title_screen/testBg.png", 6720, 1088);
+	//spriteManager.add("logo2", "graphics/title_screen/testBg.png", 1600, 800);
+	spriteManager.add("logo2", "graphics/title_screen/testBg2.png", 6720, 1088);
 
 	frame = 0;
 	gravity = 0.0f;
+	scrollX = 0.0f;
+	scrollY = 0.0f;
 	this->touchingGround = false;
 	this->jumpCount = 0;
 }
+#define FPS 30
 void title_screen::update()
 {
 	spriteManager.setFrame("logo", 8);
@@ -18,7 +22,7 @@ void title_screen::update()
 		spriteManager.getSprite("logo")->move(-1, 0);
 		spriteManager.flip("logo", true, false);
 		spriteManager.setFrame("logo", this->frame);
-		if (fps >= 60)
+		if (fps >= FPS)
 		{
 			if (this->frame > 3)
 			{
@@ -34,13 +38,14 @@ void title_screen::update()
 		{
 			fps += 1;
 		}
+		scrollX -= 1.0f;
 	}
 	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
 	{
 		spriteManager.getSprite("logo")->move(1, 0);
 		spriteManager.flip("logo", false, false);
 		spriteManager.setFrame("logo", this->frame);
-		if (fps >= 60)
+		if (fps >= FPS)
 		{
 			if (this->frame > 3)
 			{
@@ -56,6 +61,7 @@ void title_screen::update()
 		{
 			fps += 1;
 		}
+		scrollX += 1.0f;
 	}
 	if (!this->touchingGround)
 	{

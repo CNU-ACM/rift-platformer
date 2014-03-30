@@ -51,7 +51,7 @@ void Sprite::load(const char* imageName, int width, int height)
 	this->sprite.move(this->width / 2, this->height / 2);
 }
 
-void Sprite::Draw(sf::RenderWindow* window)
+void Sprite::Draw(sf::RenderTexture* window)
 {
 	window->draw(this->sprite);
 }

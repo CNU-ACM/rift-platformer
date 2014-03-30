@@ -22,7 +22,7 @@ public:
 	bool hasCollision(const char* id1, const char* id2, sf::Color &color1, sf::Color &color2);
 	void remove(const char* id);
 
-	void Update(sf::RenderWindow* window);
+	void Update(sf::RenderTexture* window);
 private:
 	std::map<std::string, Sprite*> sprites;
 	std::map<std::string, sf::Image> images;

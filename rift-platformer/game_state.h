@@ -8,14 +8,14 @@
 class game_state
 {
 public:
-	game_state(sf::RenderWindow* renderWindow);
+	game_state(sf::RenderTexture* renderWindow);
 	void Update();
-protected:
-	sf::RenderWindow* renderWindow;
-	sprite_manager spriteManager;
 	virtual void handleEvents();
 	virtual void update();
 	virtual void draw();
+protected:
+	sf::RenderTexture* renderWindow;
+	sprite_manager spriteManager;
 };
 
 #endif

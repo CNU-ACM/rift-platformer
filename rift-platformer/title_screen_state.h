@@ -6,15 +6,16 @@
 class title_screen : game_state
 {
 public:
-	title_screen(sf::RenderWindow* renderWindow);
+	title_screen(sf::RenderTexture* renderWindow);
+	int scrollX, scrollY;
+	void update();
+	void draw();
 private:
 	int fps = 0;
 	int frame;
 	int jumpCount;
 	bool touchingGround;
 	float gravity;
-	void update();
-	void draw();
 };
 
 #endif
