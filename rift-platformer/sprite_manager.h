@@ -12,6 +12,9 @@ public:
 
 	void add(const char* id, const char* fileName);
 	void add(const char* id, const char* fileName, const char* collisionFile);
+	bool isFlippedH(const char* id);
+	bool isFlippedV(const char* id);
+	void flip(const char* id, bool flipH, bool flipV);
 	sf::Sprite* getSprite(const char* id);
 	sf::Image* sprite_manager::getImage(const char* id);
 	bool hasCollision(const char* id1, const char* id2);

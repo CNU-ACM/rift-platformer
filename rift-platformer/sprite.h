@@ -7,6 +7,7 @@ class Sprite
 {
 public:
 	sf::Sprite sprite;
+	bool flippedH, flippedV;
 
 	Sprite();
 	Sprite(const char* imageName);

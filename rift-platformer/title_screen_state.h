@@ -8,6 +8,8 @@ class title_screen : game_state
 public:
 	title_screen(sf::RenderWindow* renderWindow);
 private:
+	bool touchingGround;
+	float gravity;
 	void update();
 	void draw();
 };

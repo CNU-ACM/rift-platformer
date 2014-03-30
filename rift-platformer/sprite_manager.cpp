@@ -17,6 +17,43 @@ void sprite_manager::add(const char* id, const char* fileName, const char* colli
 	this->getImage(id)->loadFromFile(collisionFile);
 }
 
+bool sprite_manager::isFlippedH(const char* id)
+{
+	return sprites.find(id)->second->flippedH;
+}
+bool sprite_manager::isFlippedV(const char* id)
+{
+	return sprites.find(id)->second->flippedV;
+}
+
+void sprite_manager::flip(const char* id, bool flipH, bool flipV)
+{
+	Sprite* sprite = sprites.find(id)->second;
+
+	if (flipH != sprite->flippedH)
+	{
+		images.find(id)->second.flipHorizontally();
+		sprite->flippedH = flipH;
+
+	}
+	if (flipV != sprite->flippedV)
+	{
+		images.find(id)->second.flipVertically();
+		sprite->flippedV = flipV;
+	}
+
+	if (flipH)
+	{
+		sprite->sprite.setTextureRect(sf::IntRect(sprite->sprite.getTexture()->getSize().x, 0,
+			-sprite->sprite.getTexture()->getSize().x, sprite->sprite.getTexture()->getSize().y));
+	}
+	else
+	{
+		sprite->sprite.setTextureRect(sf::IntRect(0, 0,
+			sprite->sprite.getTexture()->getSize().x, sprite->sprite.getTexture()->getSize().y));
+	}
+}
+
 sf::Sprite* sprite_manager::getSprite(const char* id)
 {
 	return &sprites.find(id)->second->sprite;
