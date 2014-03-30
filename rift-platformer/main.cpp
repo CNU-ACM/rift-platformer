@@ -5,7 +5,7 @@ int main()
 {
 	sf::ContextSettings contextSettings;
 	contextSettings.depthBits = 32;
-	sf::RenderWindow window(sf::VideoMode(1280, 800), "Rift Platformer", sf::Style::Default, contextSettings);
+	sf::RenderWindow window(sf::VideoMode(1024, 768), "Rift Platformer", sf::Style::Default, contextSettings);
 	window.setActive();
 
 	game_state* mainState = new game_state(&window);
