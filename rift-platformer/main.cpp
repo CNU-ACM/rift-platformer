@@ -103,8 +103,7 @@ int main()
 			{
 				window.close();
 			}
-		}
-		window.pushGLStates();
+		}		window.pushGLStates();
 		mainState->update();
 		mainState->draw();
 		texture.display();
