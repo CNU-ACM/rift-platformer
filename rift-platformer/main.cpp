@@ -1,5 +1,5 @@
 #include "game_state.h"
-#include "title_screen_state.h"
+#include "main_game_state.h"
 #include <GL/glew.h>
 #include <SFML/OpenGL.hpp>
 #include <pv/OculusRift.h>
@@ -33,6 +33,7 @@ int main()
 	sf::ContextSettings contextSettings;
 	contextSettings.depthBits = 32;
 	sf::RenderWindow window(sf::VideoMode(width, height), "Rift Platformer", sf::Style::Default, contextSettings);
+	window.setVerticalSyncEnabled(true);
 	window.setActive();
 
 	initMinGL();
@@ -87,7 +88,7 @@ int main()
 		texture.create(640, 480);
 	}
 	game_state* mainState = new game_state(&texture);
-	mainState = (game_state*)(new title_screen(&texture));
+	mainState = (game_state*)(new main_game(&texture));
 	bool start = false;
 	while (window.isOpen())
 	{
@@ -148,8 +149,8 @@ int main()
 			rotY = pv_glGetUniformLocation(program, "rotMatrixY");
 			pv_glUniformMatrix4fv(rotY, 1, false, rotMatrixY);
 			pv_glUniform2f(pv_glGetUniformLocation(program, "scroll"),
-				((title_screen*)mainState)->scrollX / 6720.0f * 100.0f,
-				((title_screen*)mainState)->scrollY / 1088.0f * 100.0f);
+				((main_game*)mainState)->scrollX / 6720.0f * 100.0f,
+				((main_game*)mainState)->scrollY / 1088.0f * 100.0f);
 			sf::Texture::bind(&texture.getTexture());
 			glBindVertexArray(verticesArrayHandle);
 			glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
@@ -167,8 +168,8 @@ int main()
 			rotY = pv_glGetUniformLocation(program, "rotMatrixY");
 			pv_glUniformMatrix4fv(rotY, 1, false, rotMatrixY);
 			pv_glUniform2f(pv_glGetUniformLocation(program, "scroll"),
-				((title_screen*)mainState)->scrollX / 6720.0f * 100.0f, 
-				((title_screen*)mainState)->scrollY / 1088.0f * 100.0f);
+				((main_game*)mainState)->scrollX / 6720.0f * 100.0f,
+				((main_game*)mainState)->scrollY / 1088.0f * 100.0f);
 			sf::Texture::bind(&texture.getTexture());
 			glBindVertexArray(verticesArrayHandle);
 			glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);

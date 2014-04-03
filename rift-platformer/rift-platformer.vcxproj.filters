@@ -13,36 +13,84 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Header Files\Objects">
+      <UniqueIdentifier>{3b82d7e5-093b-48ad-abc7-c296eccc512e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\States">
+      <UniqueIdentifier>{ce197e11-0297-48ea-ac92-66d80df61775}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Objects">
+      <UniqueIdentifier>{683da60f-b7dd-434b-9322-f3f6a1a6d226}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\States">
+      <UniqueIdentifier>{c3ee4181-3678-4aa8-8724-f3cb69bdc03a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Managers">
+      <UniqueIdentifier>{4a91bfd7-aff9-4dcc-8340-90bc06709afb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Managers">
+      <UniqueIdentifier>{fe907838-3e0e-416e-89a4-6868d8fb1502}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Objects\Characters">
+      <UniqueIdentifier>{d4044940-c937-442a-bdd7-ed0ee14775a3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Objects\Characters">
+      <UniqueIdentifier>{652928dd-6d8f-422b-abe4-e4ec7f6178e2}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="game_state.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="background.cpp">
+      <Filter>Source Files\Objects</Filter>
     </ClCompile>
-    <ClCompile Include="title_screen_state.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="drawable.cpp">
+      <Filter>Source Files\Objects</Filter>
     </ClCompile>
     <ClCompile Include="sprite.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Objects</Filter>
     </ClCompile>
-    <ClCompile Include="sprite_manager.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="game_state.cpp">
+      <Filter>Source Files\States</Filter>
+    </ClCompile>
+    <ClCompile Include="main_game_state.cpp">
+      <Filter>Source Files\States</Filter>
+    </ClCompile>
+    <ClCompile Include="object_manager.cpp">
+      <Filter>Source Files\Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="MainCharacters.cpp">
+      <Filter>Source Files\Objects\Characters</Filter>
+    </ClCompile>
+    <ClCompile Include="MainGameManager.cpp">
+      <Filter>Source Files\Managers</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="game_state.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="background.h">
+      <Filter>Header Files\Objects</Filter>
     </ClInclude>
-    <ClInclude Include="title_screen_state.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="drawable.h">
+      <Filter>Header Files\Objects</Filter>
     </ClInclude>
     <ClInclude Include="sprite.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Objects</Filter>
     </ClInclude>
-    <ClInclude Include="sprite_manager.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="game_state.h">
+      <Filter>Header Files\States</Filter>
+    </ClInclude>
+    <ClInclude Include="main_game_state.h">
+      <Filter>Header Files\States</Filter>
+    </ClInclude>
+    <ClInclude Include="object_manager.h">
+      <Filter>Header Files\Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="MainCharacter.h">
+      <Filter>Header Files\Objects\Characters</Filter>
+    </ClInclude>
+    <ClInclude Include="MainGameManager.h">
+      <Filter>Header Files\Managers</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

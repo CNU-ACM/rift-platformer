@@ -3,7 +3,7 @@
 
 #include <SFML/Window.hpp>
 #include <SFML/Graphics.hpp>
-#include "sprite_manager.h"
+#include "object_manager.h"
 
 class game_state
 {
@@ -15,7 +15,7 @@ public:
 	virtual void draw();
 protected:
 	sf::RenderTexture* renderWindow;
-	sprite_manager spriteManager;
+	object_manager objectManager;
 };
 
 #endif

@@ -2,12 +2,16 @@
 #define _TITLE_SCREEN_STATE_H_
 
 #include "game_state.h"
+#include "MainGameManager.h"
 #include <SFML/Audio.hpp>
 
-class title_screen : game_state
+#define MAIN_CHARACTER "mainCharacter"
+#define MAIN_BACKGROUND1 "bg1"
+
+class main_game : game_state
 {
 public:
-	title_screen(sf::RenderTexture* renderWindow);
+	main_game(sf::RenderTexture* renderWindow);
 	void setup();
 	float scrollX, scrollY;
 	void update();
@@ -15,8 +19,8 @@ public:
 private:
 	sf::Music song;
 	sf::SoundBuffer buffer;
+
 	int fps = 0;
-	float posX;
 	int frame;
 	int jumpCount;
 	bool touchingGround;

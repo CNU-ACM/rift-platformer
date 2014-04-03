@@ -82,17 +82,25 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="background.cpp" />
+    <ClCompile Include="drawable.cpp" />
     <ClCompile Include="game_state.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="MainCharacters.cpp" />
+    <ClCompile Include="MainGameManager.cpp" />
     <ClCompile Include="sprite.cpp" />
-    <ClCompile Include="sprite_manager.cpp" />
-    <ClCompile Include="title_screen_state.cpp" />
+    <ClCompile Include="object_manager.cpp" />
+    <ClCompile Include="main_game_state.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="background.h" />
+    <ClInclude Include="drawable.h" />
     <ClInclude Include="game_state.h" />
+    <ClInclude Include="MainCharacter.h" />
+    <ClInclude Include="MainGameManager.h" />
     <ClInclude Include="sprite.h" />
-    <ClInclude Include="sprite_manager.h" />
-    <ClInclude Include="title_screen_state.h" />
+    <ClInclude Include="object_manager.h" />
+    <ClInclude Include="main_game_state.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
